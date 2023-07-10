@@ -1,0 +1,80 @@
+{% extends "main.html" %}
+
+{% block content %}
+<style type="text/css">
+    /* Uploaded files section */
+    .uploaded-files {
+        margin-top: 50px;
+    }
+
+    .post-box {
+        background: #e6f6f6;
+        padding: 20px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .post-box-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .post-box-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 24px;
+        background-color: #db3434;
+        margin-right: 10px;
+        box-shadow: 0 0 0 2px #000406;
+    }
+
+    .post-box-name {
+        font-weight: bold;
+    }
+
+    .post-box-body {
+        margin-top: 10px;
+        font-size: 14px;
+    }
+
+    .post-box-body a {
+        color: #b9293c;
+        text-decoration: none;
+    }
+
+    .post-box-body a:hover {
+        text-decoration: underline;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-7">
+            <h2 class="text-center alert alert-primary">Uploaded Files</h2>
+            {% for post in request_tx %}
+            <div class="post-box">
+                <div class="post-box-header">
+                    <div class="post-box-avatar">
+                        {{post.user[0]}}
+                    </div>
+                    <div class="post-box-name">{{post.user}}</div>
+                </div>
+                <div>
+                    <div class="post-box-body">
+                        <p>
+                            <strong>File Name:</strong> {{post.v_file}} &#8594; <a href="{{url_for('download_file', variable=post.v_file)}}">Download</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
